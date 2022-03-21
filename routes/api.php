@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AntrianBPJSController;
 use App\Http\Controllers\API\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [RegisterController::class, 'logout']);
 });
 
-Route::middleware('auth:sanctum')->get('user', function (Request $request) {
-    return $request->user();
+Route::get('token', [AntrianBPJSController::class, 'token']);
+Route::prefix('antrian')->middleware('auth:sanctum')->group(function () {
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('profile', [RegisterController::class, 'profile']);
+    Route::post('logout', [RegisterController::class, 'logout']);
+});
+
+Route::prefix('bpjs')->group(function () {
+    Route::get('profile', [RegisterController::class, 'profile']);
 });

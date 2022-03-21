@@ -46,6 +46,7 @@ class RegisterController extends BaseController
     }
     public function profile(Request $request)
     {
+        dd($request->user());
         return $this->sendResponse($request->user(), 'Get user profile successfully.');
     }
 }
